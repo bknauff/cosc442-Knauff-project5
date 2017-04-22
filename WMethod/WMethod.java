@@ -382,11 +382,13 @@ public class WMethod{
      Utilities.printAllTestCases(tests); // Print tests.
      
      for(int i = 0; i < tests.size(); i++){
-    	 String test = "";
-    	 for(int j = 0; j < tests.get(i).length(); j++){
-    		 test += tests.get(i).charAt(j) + " ";
-    	 }
-    	 Utilities.runFSM(FSM, 1, test, " ");
+    	 String testCase = tests.get(i).replace("", " ");
+    	 String output = Utilities.runFSM(FSM, 1, testCase, " ");
+    	 if(output.contains("yes"))
+    		 System.out.println("public void testCase" + i + "(){" + "\nassertTrue(bond.bondRegex(" + testCase + "));\n}");
+    	 else
+    		 System.out.println("public void testCase" + i + "(){" + "\nassertFalse(bond.bondRegex(" + testCase + "));\n");
+    	 
      }
      
    }// End of main()
